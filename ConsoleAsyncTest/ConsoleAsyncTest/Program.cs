@@ -18,16 +18,16 @@ namespace ConsoleAsyncTest
                 var allStrings = new List<Task<string>>();
                 Console.WriteLine("Start");
                 Console.WriteLine("Add First");
-                allStrings.Add(GiveMeAString("First", 1000));
+                allStrings.Add(GiveMeAStringAsync("First", 1000));
                 Console.WriteLine("Add Second");
-                allStrings.Add(GiveMeAString("Second", 500));
-
+                allStrings.Add(GiveMeAStringAsync("Second", 500));
+                //Thread.Sleep(5000);
                 Console.WriteLine("Add Third");
-                allStrings.Add(GiveMeAString("Third", 3000));
+                allStrings.Add(GiveMeAStringAsync("Third", 3000));
                 string thirdTask = "Default Third String";
-                //thirdTask = await allStrings.Last();
+                thirdTask = await allStrings.Last();
                 Console.WriteLine("Add Forth");
-                allStrings.Add(GiveMeAString("Forth" + thirdTask, 200));
+                allStrings.Add(GiveMeAStringAsync("Forth" + thirdTask, 200));
 
                 Console.WriteLine("Wait All");
                 var task = allStrings.ToList();
@@ -43,7 +43,7 @@ namespace ConsoleAsyncTest
             Console.ReadLine();
         }
 
-        private static async Task<string> GiveMeAString(string suffixe, int millisecondTaskTake)
+        private static async Task<string> GiveMeAStringAsync(string suffixe, int millisecondTaskTake)
         {
             Console.WriteLine("Begin GiveMeAString:" + suffixe +" for " + millisecondTaskTake);
 
